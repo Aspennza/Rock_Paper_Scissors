@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.tools.Tool;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 //may need to create fonts?
 //write javadoc
@@ -27,6 +29,8 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
     ImageIcon paperIcon;
     ImageIcon scissorsIcon;
     ImageIcon quitIcon;
+
+    String playerMove;
 
     JLabel playerWinsLbl;
     JLabel computerWinsLbl;
@@ -105,7 +109,40 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         quitBtn = new JButton("Quit", quitIcon);
         rpsPnl.add(quitBtn);
 
-        //need to add ActionListeners
+        playerMove = "";
+
+        class RPSListener implements ActionListener
+        {
+            @Override
+            public void actionPerformed(ActionEvent ae)
+            {
+                if (ae.getSource() instanceof JButton selectedButton)
+                {
+                    String buttonText = selectedButton.getText();
+
+                    switch (buttonText)
+                    {
+                        case "Rock":
+                            playerMove = "R";
+                            break;
+                        case "Paper":
+                            playerMove = "P";
+                            break;
+                        case "Scissors":
+                            playerMove = "S";
+                            break;
+                    }
+                }
+            }
+        }
+
+        RPSListener listener = new RPSListener();
+
+        rockBtn.addActionListener(listener);
+        paperBtn.addActionListener(listener);
+        scissorsBtn.addActionListener(listener);
+
+        quitBtn.addActionListener((ActionEvent ae) -> System.exit(0));
     }
 
     private void createResultsPnl()
