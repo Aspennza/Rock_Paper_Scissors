@@ -29,9 +29,12 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
     JLabel playerWinsLbl;
     JLabel computerWinsLbl;
     JLabel tiesLbl;
+    JLabel totalGamesPlayedLbl;
+
     JTextField playerWinsTF;
     JTextField computerWinsTF;
     JTextField tiesTF;
+    JTextField totalGamesPlayedTF;
 
     JTextArea resultsTA;
     JScrollPane scroller;
@@ -106,7 +109,7 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
     private void createStatsPnl()
     {
         statsPnl = new JPanel();
-        statsPnl.setLayout(new GridLayout(2, 3));
+        statsPnl.setLayout(new GridLayout(2, 4));
 
         playerWinsLbl = new JLabel("Player Wins:");
         statsPnl.add(playerWinsLbl);
@@ -116,6 +119,9 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
 
         tiesLbl = new JLabel("Ties:");
         statsPnl.add(tiesLbl);
+
+        totalGamesPlayedLbl = new JLabel("Total Games Played:");
+        statsPnl.add(totalGamesPlayedLbl);
 
         playerWinsTF = new JTextField(15);
         playerWinsTF.setEditable(false);
@@ -128,6 +134,10 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         tiesTF = new JTextField(15);
         tiesTF.setEditable(false);
         statsPnl.add(tiesTF);
+
+        totalGamesPlayedTF = new JTextField(15);
+        totalGamesPlayedTF.setEditable(false);
+        statsPnl.add(totalGamesPlayedTF);
     }
 
 }
