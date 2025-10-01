@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.tools.Tool;
 import java.awt.*;
 
+//may need to create fonts?
 //write javadoc
 //create UML diagrams
 
@@ -49,6 +50,9 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
 
         createRPSPnl();
         mainPnl.add(rpsPnl, BorderLayout.NORTH);
+
+        createStatsPnl();
+        mainPnl.add(statsPnl, BorderLayout.CENTER);
         //need to call the panel creation functions here
 
         setSize(screenWidth * 3/4, screenHeight * 3/4);
@@ -61,6 +65,7 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
     private void createRPSPnl()
     {
         rpsPnl = new JPanel();
+        rpsPnl.setBorder(BorderFactory.createLineBorder(Color.black));
         rpsPnl.setLayout(new GridLayout(1, 4));
 
         rockIcon = new ImageIcon("src/rock.jpg");
@@ -80,6 +85,33 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         rpsPnl.add(quitBtn);
 
         //need to add ActionListeners
+    }
+
+    private void createStatsPnl()
+    {
+        statsPnl = new JPanel();
+        statsPnl.setLayout(new GridLayout(2, 3));
+
+        playerWinsLbl = new JLabel("Player Wins:");
+        statsPnl.add(playerWinsLbl);
+
+        computerWinsLbl = new JLabel("Computer Wins");
+        statsPnl.add(computerWinsLbl);
+
+        tiesLbl = new JLabel("Ties:");
+        statsPnl.add(tiesLbl);
+
+        playerWinsTF = new JTextField(15);
+        playerWinsTF.setEditable(false);
+        statsPnl.add(playerWinsTF);
+
+        computerWinsTF = new JTextField(15);
+        computerWinsTF.setEditable(false);
+        statsPnl.add(computerWinsTF);
+
+        tiesTF = new JTextField(15);
+        tiesTF.setEditable(false);
+        statsPnl.add(tiesTF);
     }
 
 }
