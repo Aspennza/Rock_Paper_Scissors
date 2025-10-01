@@ -31,6 +31,9 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
     ImageIcon quitIcon;
 
     String playerMove;
+    int playerRockCount;
+    int playerPaperCount;
+    int playerScissorsCount;
 
     JLabel playerWinsLbl;
     JLabel computerWinsLbl;
@@ -124,12 +127,15 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
                     {
                         case "Rock":
                             playerMove = "R";
+                            playerRockCount++;
                             break;
                         case "Paper":
                             playerMove = "P";
+                            playerPaperCount++;
                             break;
                         case "Scissors":
                             playerMove = "S";
+                            playerScissorsCount++;
                             break;
                     }
                 }
@@ -191,4 +197,39 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         statsPnl.add(totalGamesPlayedTF);
     }
 
+    public class LeastUsed implements Strategy
+    {
+        @Override
+        public String getMove(String playerMove)
+        {
+            String leastUsed = "";
+            String computerMove = "";
+
+            if (playerRockCount < playerPaperCount && playerRockCount < playerScissorsCount)
+            {
+                leastUsed = "R";
+            } else if (playerPaperCount < playerRockCount && playerPaperCount < playerScissorsCount)
+            {
+                leastUsed = "P";
+            } else
+            {
+                leastUsed = "S";
+            }
+
+            switch (leastUsed)
+            {
+                case "R":
+                    computerMove = "P";
+                    break;
+                case "P":
+                    computerMove = "S";
+                    break;
+                case "S":
+                    computerMove = "R";
+                    break;
+            }
+
+            return computerMove;
+        }
+    }
 }
