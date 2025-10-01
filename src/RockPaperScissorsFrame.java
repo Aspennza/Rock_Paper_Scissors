@@ -10,11 +10,13 @@ import java.awt.*;
 public class RockPaperScissorsFrame extends javax.swing.JFrame
 {
     JPanel mainPnl;
+    JPanel titlePnl;
     JPanel rpsPnl;
     JPanel statsPnl;
     JPanel resultsPnl;
 
-    JLabel titleLbl; //I may remove this after reviewing the lectures
+    JLabel titleLbl;
+    Font titlePnlFont;
 
     JButton rockBtn;
     JButton paperBtn;
@@ -49,24 +51,36 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         int screenWidth = screenSize.width;
 
         mainPnl = new JPanel();
-        mainPnl.setLayout(new BorderLayout());
+        mainPnl.setLayout(new GridLayout(4, 1));
         mainPnl.setBorder(new EmptyBorder(20, 20, 40, 20));
         add(mainPnl);
 
+        createTitlePnl();
+        mainPnl.add(titlePnl);
+
         createRPSPnl();
-        mainPnl.add(rpsPnl, BorderLayout.NORTH);
+        mainPnl.add(rpsPnl);
 
         createResultsPnl();
-        mainPnl.add(resultsPnl, BorderLayout.CENTER);
+        mainPnl.add(resultsPnl);
 
         createStatsPnl();
-        mainPnl.add(statsPnl, BorderLayout.SOUTH);
+        mainPnl.add(statsPnl);
 
-        setSize(screenWidth /2, screenHeight /2);
+        setSize(screenWidth * 3/4, screenHeight * 3/4);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Rock Paper Scissors Game");
         setVisible(true);
+    }
+
+    private void createTitlePnl()
+    {
+        titlePnl = new JPanel();
+        titleLbl = new JLabel("Rock Paper Scissors Game");
+        titlePnlFont = new Font("Serif", Font.BOLD, 36);
+        titleLbl.setFont(titlePnlFont);
+        titlePnl.add(titleLbl);
     }
 
     private void createRPSPnl()
