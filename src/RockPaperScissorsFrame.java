@@ -2,6 +2,9 @@ import javax.swing.*;
 import javax.tools.Tool;
 import java.awt.*;
 
+//write javadoc
+//create UML diagrams
+
 public class RockPaperScissorsFrame extends javax.swing.JFrame
 {
     JPanel mainPnl;
@@ -50,7 +53,8 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
     private void createRPSPnl()
     {
         rpsPnl = new JPanel();
-
+        rockIcon = new ImageIcon("src/rock.jpg");
+        rockBtn = new JButton("Rock", rockIcon);
     }
 
 }
