@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.tools.Tool;
 import java.awt.*;
 
@@ -46,16 +47,19 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
 
         mainPnl = new JPanel();
         mainPnl.setLayout(new BorderLayout());
+        mainPnl.setBorder(new EmptyBorder(20, 20, 40, 20));
         add(mainPnl);
 
         createRPSPnl();
         mainPnl.add(rpsPnl, BorderLayout.NORTH);
 
-        createStatsPnl();
-        mainPnl.add(statsPnl, BorderLayout.CENTER);
-        //need to call the panel creation functions here
+        createResultsPnl();
+        mainPnl.add(resultsPnl, BorderLayout.CENTER);
 
-        setSize(screenWidth * 3/4, screenHeight * 3/4);
+        createStatsPnl();
+        mainPnl.add(statsPnl, BorderLayout.SOUTH);
+
+        setSize(screenWidth /2, screenHeight /2);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Rock Paper Scissors Game");
@@ -87,6 +91,18 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         //need to add ActionListeners
     }
 
+    private void createResultsPnl()
+    {
+        resultsPnl = new JPanel();
+        resultsPnl.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        resultsTA = new JTextArea(10, 50);
+        resultsTA.setEditable(false);
+        scroller = new JScrollPane(resultsTA);
+
+        resultsPnl.add(scroller);
+    }
+
     private void createStatsPnl()
     {
         statsPnl = new JPanel();
@@ -95,7 +111,7 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         playerWinsLbl = new JLabel("Player Wins:");
         statsPnl.add(playerWinsLbl);
 
-        computerWinsLbl = new JLabel("Computer Wins");
+        computerWinsLbl = new JLabel("Computer Wins:");
         statsPnl.add(computerWinsLbl);
 
         tiesLbl = new JLabel("Ties:");
