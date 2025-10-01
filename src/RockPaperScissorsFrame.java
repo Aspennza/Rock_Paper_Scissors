@@ -232,4 +232,40 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
             return computerMove;
         }
     }
+
+    public class MostUsed implements Strategy
+    {
+        @Override
+        public String getMove(String playerMove)
+        {
+            String mostUsed = "";
+            String computerMove = "";
+
+            if (playerRockCount > playerPaperCount && playerRockCount > playerScissorsCount)
+            {
+                mostUsed = "R";
+            } else if (playerPaperCount > playerRockCount && playerPaperCount > playerScissorsCount)
+            {
+                mostUsed = "P";
+            } else
+            {
+                mostUsed = "S";
+            }
+
+            switch (mostUsed)
+            {
+                case "R":
+                    computerMove = "P";
+                    break;
+                case "P":
+                    computerMove = "S";
+                    break;
+                case "S":
+                    computerMove = "R";
+                    break;
+            }
+
+            return computerMove;
+        }
+    }
 }
