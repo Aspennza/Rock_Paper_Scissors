@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+
+//Return to implementing the resolve method for calculating who wins
+//Return to Prof. Wulf's tuesday lecture at 20 mins in
 //may need to create fonts?
 //write javadoc
 //create UML diagrams
@@ -203,7 +206,15 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
 
     public String resolve(String playerMove, String computerMove)
     {
+        String result = "";
 
+        if(playerMove.equals("R"))
+        {
+            if(computerMove.equals("R"))
+            {
+
+            }
+        }
     }
 
     public class LeastUsed implements Strategy
