@@ -49,8 +49,13 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
 
         createRPSPnl();
         mainPnl.add(rpsPnl, BorderLayout.NORTH);
-
         //need to call the panel creation functions here
+
+        setSize(screenWidth * 3/4, screenHeight * 3/4);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Rock Paper Scissors Game");
+        setVisible(true);
     }
 
     private void createRPSPnl()
@@ -73,6 +78,8 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         quitIcon = new ImageIcon("src/quit.jpg");
         quitBtn = new JButton("Quit", quitIcon);
         rpsPnl.add(quitBtn);
+
+        //need to add ActionListeners
     }
 
 }
