@@ -4,6 +4,7 @@ import javax.tools.Tool;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 //may need to create fonts?
 //write javadoc
@@ -31,9 +32,12 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
     ImageIcon quitIcon;
 
     String playerMove;
+    String prevPlayerMove;
     int playerRockCount;
     int playerPaperCount;
     int playerScissorsCount;
+
+    String computerMove;
 
     JLabel playerWinsLbl;
     JLabel computerWinsLbl;
@@ -197,13 +201,17 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         statsPnl.add(totalGamesPlayedTF);
     }
 
+    public String resolve(String playerMove, String computerMove)
+    {
+
+    }
+
     public class LeastUsed implements Strategy
     {
         @Override
         public String getMove(String playerMove)
         {
             String leastUsed = "";
-            String computerMove = "";
 
             if (playerRockCount < playerPaperCount && playerRockCount < playerScissorsCount)
             {
@@ -239,7 +247,6 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         public String getMove(String playerMove)
         {
             String mostUsed = "";
-            String computerMove = "";
 
             if (playerRockCount > playerPaperCount && playerRockCount > playerScissorsCount)
             {
@@ -268,4 +275,38 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
             return computerMove;
         }
     }
+
+    public class LastUsed implements Strategy
+    {
+        @Override
+        public String getMove(String playerMove)
+        {
+            Random gen = new Random();
+            int rpsIndex = 0;
+
+            if(playerMove != null)
+            {
+                computerMove = playerMove;
+            } else
+            {
+                rpsIndex = gen.nextInt(3);
+
+                switch (rpsIndex)
+                {
+                    case 0:
+                        computerMove = "R";
+                        break;
+                    case 1:
+                        computerMove = "P";
+                        break;
+                    case 2:
+                        computerMove = "S";
+                        break;
+                }
+            }
+
+            return computerMove;
+        }
+    }
+
 }
