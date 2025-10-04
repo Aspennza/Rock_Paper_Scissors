@@ -1,6 +1,5 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.tools.Tool;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -253,78 +252,31 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         @Override
         public String getMove(String playerMove)
         {
-            Random gen = new Random();
-            int rpsIndex = 0;
-
             int min = Math.min(playerRockCount, Math.min(playerPaperCount, playerScissorsCount));
-            if (playerRockCount != playerPaperCount && playerPaperCount != playerScissorsCount && playerRockCount != playerScissorsCount)
-            {
-                if(playerRockCount == min)
-                    computerMove = "P";
-                else if (playerPaperCount == min)
-                    computerMove = "S";
-                else
-                    computerMove = "R";
-            } else
-            {
-                rpsIndex = gen.nextInt(2);
 
-                if(playerRockCount == playerPaperCount && rpsIndex == 0)
-                {
-                    computerMove = "P";
-                } else if (playerRockCount == playerPaperCount && rpsIndex == 1)
-                {
-                    computerMove = "S";
-                } else if (playerPaperCount == playerScissorsCount && rpsIndex == 0)
-                {
-                    computerMove = "S";
-                } else if (playerPaperCount == playerScissorsCount && rpsIndex == 1)
-                {
-                    computerMove = "R";
-                } else if (playerRockCount == playerScissorsCount && rpsIndex == 0)
-                {
-                    computerMove = "P";
-                } else
-                {
-                    computerMove = "R";
-                }
-            }
-            return computerMove;
+                if(playerRockCount == min)
+                    return "P";
+                else if (playerPaperCount == min)
+                    return "S";
+                else
+                    return "R";
         }
     }
+    LeastUsed leastUsedStrategy = new LeastUsed();
 
     public class MostUsed implements Strategy
     {
         @Override
         public String getMove(String playerMove)
         {
-            String mostUsed = "";
+            int max = Math.max(playerRockCount, Math.max(playerPaperCount, playerScissorsCount));
 
-            if (playerRockCount > playerPaperCount && playerRockCount > playerScissorsCount)
-            {
-                mostUsed = "R";
-            } else if (playerPaperCount > playerRockCount && playerPaperCount > playerScissorsCount)
-            {
-                mostUsed = "P";
-            } else
-            {
-                mostUsed = "S";
-            }
-
-            switch (mostUsed)
-            {
-                case "R":
-                    computerMove = "P";
-                    break;
-                case "P":
-                    computerMove = "S";
-                    break;
-                case "S":
-                    computerMove = "R";
-                    break;
-            }
-
-            return computerMove;
+            if(playerRockCount == max)
+                return "P";
+            else if (playerPaperCount == max)
+                return "S";
+            else
+                return "R";
         }
     }
 
