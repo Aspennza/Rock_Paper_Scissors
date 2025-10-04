@@ -64,48 +64,70 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
     CheatStrategy cheatStrat = new CheatStrategy();
     RandomStrategy randomStrat = new RandomStrategy();
 
-    public String resolve(String playerMove)
+    public void resolve(String playerMove)
     {
+        String compMove = getComputerMove(playerMove);
         String result = "";
+
+        resultsTA.append("Player: " + playerMove + " Computer: " + compMove + "\n");
 
         if(playerMove.equals("R"))
         {
             if(computerMove.equals("R"))
             {
                 result = "Rock vs. Rock! It's a tie!";
+                ties++;
+                tiesTF.setText(ties + "");
             } else if (computerMove.equals("P"))
             {
                 result = "Paper covers Rock! Computer wins!";
+                compWins++;
+                computerWinsTF.setText(compWins + "");
             } else
             {
                 result = "Rock breaks Scissors! Player wins!";
+                playWins++;
+                playerWinsTF.setText(playWins + "");
             }
         } else if (playerMove.equals("P"))
         {
             if(computerMove.equals("R"))
             {
                 result = "Paper covers Rock! Player wins!";
+                playWins++;
+                playerWinsTF.setText(playWins + "");
             } else if (computerMove.equals("P"))
             {
                 result = "Paper vs. Paper! It's a tie!";
+                ties++;
+                tiesTF.setText(ties + "");
             } else
             {
                 result = "Scissors cuts Paper! Computer wins!";
+                compWins++;
+                computerWinsTF.setText(compWins + "");
             }
         } else
         {
             if(computerMove.equals("R"))
             {
                 result = "Rock breaks Scissors! Computer wins!";
+                compWins++;
+                computerWinsTF.setText(compWins + "");
             } else if (computerMove.equals("P"))
             {
                 result = "Scissors cuts Paper! Player wins!";
+                playWins++;
+                playerWinsTF.setText(playWins + "");
             } else
             {
                 result = "Scissors vs. Scissors! It's a tie!";
+                ties++;
+                tiesTF.setText(ties + "");
             }
         }
-        return result;
+
+        resultsTA.append(result + " (" + compStrategy + ")\n");
     }
 
     class LeastUsed implements Strategy
