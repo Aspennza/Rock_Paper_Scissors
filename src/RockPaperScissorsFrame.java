@@ -185,7 +185,7 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         String compMove = getComputerMove(playerMove);
         String result = "";
 
-        resultsTA.append("Player: " + playerMove + " Computer: " + compMove + "\n");
+        resultsTA.append("Player: " + playerMove + "; Computer: " + compMove + "\n");
 
         if(playerMove.equals("R"))
         {
