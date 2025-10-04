@@ -300,9 +300,9 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
             Random gen = new Random();
             int rpsIndex = 0;
 
-            if(playerMove != null)
+            if(!lastPlayerMove.isEmpty())
             {
-                computerMove = playerMove;
+                computerMove = lastPlayerMove;
             } else
             {
                 rpsIndex = gen.nextInt(3);
@@ -324,5 +324,6 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
             return computerMove;
         }
     }
+    LastUsed lastUsedStrategy = new LastUsed();
 
 }
