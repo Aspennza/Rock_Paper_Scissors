@@ -212,9 +212,40 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         {
             if(computerMove.equals("R"))
             {
-
+                result = "Rock vs. Rock! It's a tie!";
+            } else if (computerMove.equals("P"))
+            {
+                result = "Paper covers Rock! Computer wins!";
+            } else
+            {
+                result = "Rock breaks Scissors! Player wins!";
+            }
+        } else if (playerMove.equals("P"))
+        {
+            if(computerMove.equals("R"))
+            {
+                result = "Paper covers Rock! Player wins!";
+            } else if (computerMove.equals("P"))
+            {
+                result = "Paper vs. Paper! It's a tie!";
+            } else
+            {
+                result = "Scissors cuts Paper! Computer wins!";
+            }
+        } else
+        {
+            if(computerMove.equals("R"))
+            {
+                result = "Rock breaks Scissors! Computer wins!";
+            } else if (computerMove.equals("P"))
+            {
+                result = "Scissors cuts Paper! Player wins!";
+            } else
+            {
+                result = "Scissors vs. Scissors! It's a tie!";
             }
         }
+        return result;
     }
 
     public class LeastUsed implements Strategy
