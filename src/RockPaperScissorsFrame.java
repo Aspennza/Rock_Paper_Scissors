@@ -34,12 +34,23 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
     ImageIcon quitIcon;
 
     String playerMove;
-    String prevPlayerMove;
+    String computerMove;
+
     int playerRockCount;
     int playerPaperCount;
     int playerScissorsCount;
 
-    String computerMove;
+    int compRockCount;
+    int compPaperCount;
+    int compScissorsCount;
+
+    int compWins;
+    int playWins;
+    int ties;
+
+    String lastCompMove = "";
+    String lastPlayerMove = "";
+    String compStrategy = "";
 
     JLabel playerWinsLbl;
     JLabel computerWinsLbl;
@@ -247,7 +258,7 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         return result;
     }
 
-    public class LeastUsed implements Strategy
+    class LeastUsed implements Strategy
     {
         @Override
         public String getMove(String playerMove)
@@ -264,7 +275,7 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
     }
     LeastUsed leastUsedStrategy = new LeastUsed();
 
-    public class MostUsed implements Strategy
+    class MostUsed implements Strategy
     {
         @Override
         public String getMove(String playerMove)
@@ -279,8 +290,9 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
                 return "R";
         }
     }
+    MostUsed mostUsedStrategy = new MostUsed();
 
-    public class LastUsed implements Strategy
+    class LastUsed implements Strategy
     {
         @Override
         public String getMove(String playerMove)
