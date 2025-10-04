@@ -16,6 +16,9 @@ public class CheatStrategy implements Strategy
             case "S":
                 computerMove = "R";
                 break;
+            default:
+                computerMove = "X";
+                break;
         }
         return computerMove;
     }
