@@ -43,6 +43,7 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
     int compWins;
     int playWins;
     int ties;
+    int totalGamesPlayed;
 
     String lastCompMove = "";
     String lastPlayerMove = "";
@@ -128,6 +129,8 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         }
 
         resultsTA.append(result + " (" + compStrategy + ")\n");
+        totalGamesPlayed++;
+        totalGamesPlayedTF.setText(totalGamesPlayed + "");
     }
 
     class LeastUsed implements Strategy
@@ -199,6 +202,54 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         }
     }
     LastUsed lastUsedStrategy = new LastUsed();
+
+    public String getComputerMove(String playerMove)
+    {
+        Random gen = new Random();
+        int prob = gen.nextInt(100) + 1;
+
+        String compMove = "";
+
+        if(prob <= 10)
+        {
+            compStrategy = "Cheat";
+            compMove = cheatStrat.getMove(playerMove);
+        } else if (prob <= 30)
+        {
+            compStrategy = "Least Used";
+            compMove = leastUsedStrategy.getMove(playerMove);
+        } else if (prob <= 50)
+        {
+            compStrategy = "Most Used";
+            compMove = mostUsedStrategy.getMove(playerMove);
+        } else if (prob <= 70)
+        {
+            compStrategy = "Last Used";
+            compMove = lastUsedStrategy.getMove(playerMove);
+        } else
+        {
+            compStrategy = "Random";
+            compMove = randomStrat.getMove(playerMove);
+        }
+
+        switch (compMove)
+        {
+            case "R":
+                compRockCount++;
+                lastCompMove = "R";
+                break;
+            case "P":
+                compPaperCount++;
+                lastCompMove = "P";
+                break;
+            case "S":
+                compScissorsCount++;
+                lastCompMove = "S";
+                break;
+        }
+
+        return compMove;
+    }
 
     public RockPaperScissorsFrame()
     {
@@ -294,53 +345,7 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         quitBtn.addActionListener((ActionEvent ae) -> System.exit(0));
     }
 
-    public String getComputerMove(String playerMove)
-    {
-        Random gen = new Random();
-        int prob = gen.nextInt(100) + 1;
 
-        String compMove = "";
-
-        if(prob <= 10)
-        {
-            compStrategy = "Cheat";
-            compMove = cheatStrat.getMove(playerMove);
-        } else if (prob <= 30)
-        {
-            compStrategy = "Least Used";
-            compMove = leastUsedStrategy.getMove(playerMove);
-        } else if (prob <= 50)
-        {
-            compStrategy = "Most Used";
-            compMove = mostUsedStrategy.getMove(playerMove);
-        } else if (prob <= 70)
-        {
-            compStrategy = "Last Used";
-            compMove = lastUsedStrategy.getMove(playerMove);
-        } else
-        {
-            compStrategy = "Random";
-            compMove = randomStrat.getMove(playerMove);
-        }
-
-        switch (compMove)
-        {
-            case "R":
-                compRockCount++;
-                lastCompMove = "R";
-                break;
-            case "P":
-                compPaperCount++;
-                lastCompMove = "P";
-                break;
-            case "S":
-                compScissorsCount++;
-                lastCompMove = "S";
-                break;
-        }
-
-        return compMove;
-    }
 
     private void createResultsPnl()
     {
