@@ -61,7 +61,120 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
     JTextArea resultsTA;
     JScrollPane scroller;
 
+    CheatStrategy cheatStrat = new CheatStrategy();
     RandomStrategy randomStrat = new RandomStrategy();
+
+    public String resolve(String playerMove, String computerMove)
+    {
+        String result = "";
+
+        if(playerMove.equals("R"))
+        {
+            if(computerMove.equals("R"))
+            {
+                result = "Rock vs. Rock! It's a tie!";
+            } else if (computerMove.equals("P"))
+            {
+                result = "Paper covers Rock! Computer wins!";
+            } else
+            {
+                result = "Rock breaks Scissors! Player wins!";
+            }
+        } else if (playerMove.equals("P"))
+        {
+            if(computerMove.equals("R"))
+            {
+                result = "Paper covers Rock! Player wins!";
+            } else if (computerMove.equals("P"))
+            {
+                result = "Paper vs. Paper! It's a tie!";
+            } else
+            {
+                result = "Scissors cuts Paper! Computer wins!";
+            }
+        } else
+        {
+            if(computerMove.equals("R"))
+            {
+                result = "Rock breaks Scissors! Computer wins!";
+            } else if (computerMove.equals("P"))
+            {
+                result = "Scissors cuts Paper! Player wins!";
+            } else
+            {
+                result = "Scissors vs. Scissors! It's a tie!";
+            }
+        }
+        return result;
+    }
+
+    class LeastUsed implements Strategy
+    {
+        @Override
+        public String getMove(String playerMove)
+        {
+            int min = Math.min(playerRockCount, Math.min(playerPaperCount, playerScissorsCount));
+
+            if(playerRockCount == min)
+                return "P";
+            else if (playerPaperCount == min)
+                return "S";
+            else
+                return "R";
+        }
+    }
+    LeastUsed leastUsedStrategy = new LeastUsed();
+
+    class MostUsed implements Strategy
+    {
+        @Override
+        public String getMove(String playerMove)
+        {
+            int max = Math.max(playerRockCount, Math.max(playerPaperCount, playerScissorsCount));
+
+            if(playerRockCount == max)
+                return "P";
+            else if (playerPaperCount == max)
+                return "S";
+            else
+                return "R";
+        }
+    }
+    MostUsed mostUsedStrategy = new MostUsed();
+
+    class LastUsed implements Strategy
+    {
+        @Override
+        public String getMove(String playerMove)
+        {
+            Random gen = new Random();
+            int rpsIndex = 0;
+
+            if(!lastPlayerMove.isEmpty())
+            {
+                computerMove = lastPlayerMove;
+            } else
+            {
+                rpsIndex = gen.nextInt(3);
+
+                switch (rpsIndex)
+                {
+                    case 0:
+                        computerMove = "R";
+                        break;
+                    case 1:
+                        computerMove = "P";
+                        break;
+                    case 2:
+                        computerMove = "S";
+                        break;
+                }
+            }
+
+            return computerMove;
+        }
+    }
+    LastUsed lastUsedStrategy = new LastUsed();
 
     public RockPaperScissorsFrame()
     {
@@ -204,116 +317,6 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         statsPnl.add(totalGamesPlayedTF);
     }
 
-    public String resolve(String playerMove, String computerMove)
-    {
-        String result = "";
 
-        if(playerMove.equals("R"))
-        {
-            if(computerMove.equals("R"))
-            {
-                result = "Rock vs. Rock! It's a tie!";
-            } else if (computerMove.equals("P"))
-            {
-                result = "Paper covers Rock! Computer wins!";
-            } else
-            {
-                result = "Rock breaks Scissors! Player wins!";
-            }
-        } else if (playerMove.equals("P"))
-        {
-            if(computerMove.equals("R"))
-            {
-                result = "Paper covers Rock! Player wins!";
-            } else if (computerMove.equals("P"))
-            {
-                result = "Paper vs. Paper! It's a tie!";
-            } else
-            {
-                result = "Scissors cuts Paper! Computer wins!";
-            }
-        } else
-        {
-            if(computerMove.equals("R"))
-            {
-                result = "Rock breaks Scissors! Computer wins!";
-            } else if (computerMove.equals("P"))
-            {
-                result = "Scissors cuts Paper! Player wins!";
-            } else
-            {
-                result = "Scissors vs. Scissors! It's a tie!";
-            }
-        }
-        return result;
-    }
-
-    class LeastUsed implements Strategy
-    {
-        @Override
-        public String getMove(String playerMove)
-        {
-            int min = Math.min(playerRockCount, Math.min(playerPaperCount, playerScissorsCount));
-
-                if(playerRockCount == min)
-                    return "P";
-                else if (playerPaperCount == min)
-                    return "S";
-                else
-                    return "R";
-        }
-    }
-    LeastUsed leastUsedStrategy = new LeastUsed();
-
-    class MostUsed implements Strategy
-    {
-        @Override
-        public String getMove(String playerMove)
-        {
-            int max = Math.max(playerRockCount, Math.max(playerPaperCount, playerScissorsCount));
-
-            if(playerRockCount == max)
-                return "P";
-            else if (playerPaperCount == max)
-                return "S";
-            else
-                return "R";
-        }
-    }
-    MostUsed mostUsedStrategy = new MostUsed();
-
-    class LastUsed implements Strategy
-    {
-        @Override
-        public String getMove(String playerMove)
-        {
-            Random gen = new Random();
-            int rpsIndex = 0;
-
-            if(!lastPlayerMove.isEmpty())
-            {
-                computerMove = lastPlayerMove;
-            } else
-            {
-                rpsIndex = gen.nextInt(3);
-
-                switch (rpsIndex)
-                {
-                    case 0:
-                        computerMove = "R";
-                        break;
-                    case 1:
-                        computerMove = "P";
-                        break;
-                    case 2:
-                        computerMove = "S";
-                        break;
-                }
-            }
-
-            return computerMove;
-        }
-    }
-    LastUsed lastUsedStrategy = new LastUsed();
 
 }
