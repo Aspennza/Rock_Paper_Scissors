@@ -6,9 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 
 
-//Return to implementing the resolve method for calculating who wins
-//Return to Prof. Wulf's tuesday lecture at 20 mins in
-//may need to create fonts?
+//Maybe try to make the interface slightly prettier
 //write javadoc
 //create UML diagrams
 
@@ -30,7 +28,6 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
     ImageIcon quitIcon;
 
     String playerMove;
-    String computerMove;
 
     int playerRockCount;
     int playerPaperCount;
@@ -64,74 +61,6 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
 
     CheatStrategy cheatStrat = new CheatStrategy();
     RandomStrategy randomStrat = new RandomStrategy();
-
-    public void resolve(String playerMove)
-    {
-        String compMove = getComputerMove(playerMove);
-        String result = "";
-
-        resultsTA.append("Player: " + playerMove + " Computer: " + compMove + "\n");
-
-        if(playerMove.equals("R"))
-        {
-            if(computerMove.equals("R"))
-            {
-                result = "Rock vs. Rock! It's a tie!";
-                ties++;
-                tiesTF.setText(ties + "");
-            } else if (computerMove.equals("P"))
-            {
-                result = "Paper covers Rock! Computer wins!";
-                compWins++;
-                computerWinsTF.setText(compWins + "");
-            } else
-            {
-                result = "Rock breaks Scissors! Player wins!";
-                playWins++;
-                playerWinsTF.setText(playWins + "");
-            }
-        } else if (playerMove.equals("P"))
-        {
-            if(computerMove.equals("R"))
-            {
-                result = "Paper covers Rock! Player wins!";
-                playWins++;
-                playerWinsTF.setText(playWins + "");
-            } else if (computerMove.equals("P"))
-            {
-                result = "Paper vs. Paper! It's a tie!";
-                ties++;
-                tiesTF.setText(ties + "");
-            } else
-            {
-                result = "Scissors cuts Paper! Computer wins!";
-                compWins++;
-                computerWinsTF.setText(compWins + "");
-            }
-        } else
-        {
-            if(computerMove.equals("R"))
-            {
-                result = "Rock breaks Scissors! Computer wins!";
-                compWins++;
-                computerWinsTF.setText(compWins + "");
-            } else if (computerMove.equals("P"))
-            {
-                result = "Scissors cuts Paper! Player wins!";
-                playWins++;
-                playerWinsTF.setText(playWins + "");
-            } else
-            {
-                result = "Scissors vs. Scissors! It's a tie!";
-                ties++;
-                tiesTF.setText(ties + "");
-            }
-        }
-
-        resultsTA.append(result + " (" + compStrategy + ")\n");
-        totalGamesPlayed++;
-        totalGamesPlayedTF.setText(totalGamesPlayed + "");
-    }
 
     class LeastUsed implements Strategy
     {
@@ -249,6 +178,74 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         }
 
         return compMove;
+    }
+
+    public void resolve(String playerMove)
+    {
+        String compMove = getComputerMove(playerMove);
+        String result = "";
+
+        resultsTA.append("Player: " + playerMove + " Computer: " + compMove + "\n");
+
+        if(playerMove.equals("R"))
+        {
+            if(compMove.equals("R"))
+            {
+                result = "Rock vs. Rock! It's a tie!";
+                ties++;
+                tiesTF.setText(ties + "");
+            } else if (compMove.equals("P"))
+            {
+                result = "Paper covers Rock! Computer wins!";
+                compWins++;
+                computerWinsTF.setText(compWins + "");
+            } else
+            {
+                result = "Rock breaks Scissors! Player wins!";
+                playWins++;
+                playerWinsTF.setText(playWins + "");
+            }
+        } else if (playerMove.equals("P"))
+        {
+            if(compMove.equals("R"))
+            {
+                result = "Paper covers Rock! Player wins!";
+                playWins++;
+                playerWinsTF.setText(playWins + "");
+            } else if (compMove.equals("P"))
+            {
+                result = "Paper vs. Paper! It's a tie!";
+                ties++;
+                tiesTF.setText(ties + "");
+            } else
+            {
+                result = "Scissors cuts Paper! Computer wins!";
+                compWins++;
+                computerWinsTF.setText(compWins + "");
+            }
+        } else
+        {
+            if(compMove.equals("R"))
+            {
+                result = "Rock breaks Scissors! Computer wins!";
+                compWins++;
+                computerWinsTF.setText(compWins + "");
+            } else if (compMove.equals("P"))
+            {
+                result = "Scissors cuts Paper! Player wins!";
+                playWins++;
+                playerWinsTF.setText(playWins + "");
+            } else
+            {
+                result = "Scissors vs. Scissors! It's a tie!";
+                ties++;
+                tiesTF.setText(ties + "");
+            }
+        }
+
+        resultsTA.append(result + " (" + compStrategy + ")\n");
+        totalGamesPlayed++;
+        totalGamesPlayedTF.setText(totalGamesPlayed + "");
     }
 
     public RockPaperScissorsFrame()
