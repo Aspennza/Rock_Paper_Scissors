@@ -253,32 +253,42 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         @Override
         public String getMove(String playerMove)
         {
-            String leastUsed = "";
+            Random gen = new Random();
+            int rpsIndex = 0;
 
-            if (playerRockCount < playerPaperCount && playerRockCount < playerScissorsCount)
+            int min = Math.min(playerRockCount, Math.min(playerPaperCount, playerScissorsCount));
+            if (playerRockCount != playerPaperCount && playerPaperCount != playerScissorsCount && playerRockCount != playerScissorsCount)
             {
-                leastUsed = "R";
-            } else if (playerPaperCount < playerRockCount && playerPaperCount < playerScissorsCount)
-            {
-                leastUsed = "P";
+                if(playerRockCount == min)
+                    computerMove = "P";
+                else if (playerPaperCount == min)
+                    computerMove = "S";
+                else
+                    computerMove = "R";
             } else
             {
-                leastUsed = "S";
-            }
+                rpsIndex = gen.nextInt(2);
 
-            switch (leastUsed)
-            {
-                case "R":
+                if(playerRockCount == playerPaperCount && rpsIndex == 0)
+                {
                     computerMove = "P";
-                    break;
-                case "P":
+                } else if (playerRockCount == playerPaperCount && rpsIndex == 1)
+                {
                     computerMove = "S";
-                    break;
-                case "S":
+                } else if (playerPaperCount == playerScissorsCount && rpsIndex == 0)
+                {
+                    computerMove = "S";
+                } else if (playerPaperCount == playerScissorsCount && rpsIndex == 1)
+                {
                     computerMove = "R";
-                    break;
+                } else if (playerRockCount == playerScissorsCount && rpsIndex == 0)
+                {
+                    computerMove = "P";
+                } else
+                {
+                    computerMove = "R";
+                }
             }
-
             return computerMove;
         }
     }
