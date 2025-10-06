@@ -13,9 +13,13 @@ import java.util.Random;
 public class RockPaperScissorsFrame extends javax.swing.JFrame
 {
     JPanel mainPnl;
+    JPanel titlePnl;
     JPanel rpsPnl;
     JPanel statsPnl;
     JPanel resultsPnl;
+
+    JLabel titleLbl;
+    Font titlePnlFont;
 
     JButton rockBtn;
     JButton paperBtn;
@@ -258,9 +262,12 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         int screenWidth = screenSize.width;
 
         mainPnl = new JPanel();
-        mainPnl.setLayout(new GridLayout(3, 1));
+        mainPnl.setLayout(new GridLayout(4, 1));
         mainPnl.setBorder(new EmptyBorder(20, 20, 40, 20));
         add(mainPnl);
+
+        createTitlePnl();
+        mainPnl.add(titlePnl);
 
         createRPSPnl();
         mainPnl.add(rpsPnl);
@@ -276,6 +283,16 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Rock Paper Scissors Game");
         setVisible(true);
+    }
+
+    private void createTitlePnl()
+    {
+        titlePnl = new JPanel();
+        titleLbl = new JLabel("Rock Paper Scissors Game");
+        titlePnlFont = new Font("Serif", Font.BOLD, 48);
+        titleLbl.setFont(titlePnlFont);
+
+        titlePnl.add(titleLbl);
     }
 
     private void createRPSPnl()
@@ -349,7 +366,7 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
         resultsPnl = new JPanel();
         resultsPnl.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        resultsTA = new JTextArea(13, 50);
+        resultsTA = new JTextArea(10, 50);
         resultsTA.setEditable(false);
         scroller = new JScrollPane(resultsTA);
 
