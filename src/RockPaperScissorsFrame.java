@@ -247,7 +247,7 @@ public class RockPaperScissorsFrame extends javax.swing.JFrame
             }
         }
 
-        resultsTA.append(result + " (" + compStrategy + ")\n");
+        resultsTA.append(result + " (Computer Strategy: " + compStrategy + ")\n");
         totalGamesPlayed++;
         totalGamesPlayedTF.setText(totalGamesPlayed + "");
     }
